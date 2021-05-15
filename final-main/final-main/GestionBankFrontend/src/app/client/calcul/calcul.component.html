@@ -1,0 +1,24 @@
+<div class="animated fadeIn" *ngIf="source">
+  <div class="row card">
+    <div class="card-header col-12">
+      <i class="fa fa-users"></i><span>Tableau Calcul Paie</span>
+      <input #search
+             class="ml-1"
+             size="40"
+             type="text"
+             placeholder="Cherchez par code ou libelle"
+             (input)="onSearch(search.value)"
+      />
+      <i class="fa fa-search ml-1"></i>
+    </div>
+    <div class="card-body table-responsive ">
+      <ng2-smart-table
+        [settings]='settings'
+        [source]='source'
+        (custom)='onprint($event)'
+        >
+      </ng2-smart-table>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<h1>Affectation</h1>
+
+<div class="row">
+  <div class="col-md-10">
+    <div class="card" >
+      <div class="card-header" ><strong>Postuler à </strong>  title </div>
+      <div class="card-body">
+        <form class="form-horizontal" [formGroup]="formulaire">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="code"><strong>Code:</strong> </label>
+            <div class="col-md-9">
+              <input 
+                type="text"
+                id="code"
+                class="form-control" 
+                placeholder="code" 
+                formControlName="code" 
+                [class.is-invalid]="code.invalid && (code.dirty || code.touched)" 
+              />
+              <small class="text-danger" *ngIf="code.invalid && (code.dirty || code.touched)">
+                <div *ngIf="code.errors.required">champ requis</div>
+              </small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="libelle"><strong>libelle:</strong> </label>
+            <div class="col-md-9">
+              <input 
+                type="text"
+                id="libelle"
+                class="form-control" 
+                placeholder="libelle" 
+                formControlName="libelle" 
+                [class.is-invalid]="libelle.invalid && (libelle.dirty || libelle.touched)" 
+              />
+              <small class="text-danger" *ngIf="libelle.invalid && (libelle.dirty || libelle.touched)">
+                <div *ngIf="libelle.errors.required">champ requis</div>
+              </small>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button
+              type="submit"
+              class="btn btn-sm btn-primary"
+              [disabled]="formulaire.invalid"
+              (click)="saveForm()"
+            >
+              <i class="fa fa-dot-circle-o"></i> Confirmer
+            </button>
+            <button
+              type="reset"
+              class="btn btn-sm btn-danger"
+              (click)="resetForm()"
+            >
+              <i class="fa fa-ban"></i> Ignorer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Table -->
+<div class="animated fadeIn" *ngIf="source">
+  <div class="row card">
+      <div class="card-header col-12">
+          <i class="fa fa-users"></i><span>Tableau d'affection</span>
+          <input #search
+           class="ml-1"
+           size="40"
+           type="text"
+           placeholder="Cherchez par code ou libelle"
+           (input)="onSearch(search.value)"
+          />
+          <i class="fa fa-search ml-1"></i>
+      </div>
+      <div class="card-body table-responsive ">
+          <ng2-smart-table 
+           [settings]='settings' 
+           [source]='source'
+           (deleteConfirm)='deleteAffectation($event)'>
+          </ng2-smart-table>
+      </div>
+  </div>
+</div>
